@@ -1,0 +1,41 @@
+<mat-card class="container" appearance="outlined">
+    <div class="row g-0">
+        <div class="col-3 d-flex justify-content-center">
+            <img mat-card-image [src]="pokemon().picture">
+        </div>
+        <div class="col-9 mt-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1>{{ pokemon().name }}</h1>
+                <div>
+                    <button mat-icon-button [routerLink]="['/pokemons/edit', pokemon().id]"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button><mat-icon>delete</mat-icon></button>
+                </div>
+            </div>
+            <mat-list class="w-100">
+                <div class="d-flex justify-content-end align-items-center">
+                    <mat-list-item>Points de vie</mat-list-item>
+                    <span class="col-3">{{pokemon().life}}</span>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="d-flex justify-content-between align-items-center">
+                    <mat-list-item>Dégats</mat-list-item>
+                    <span class="col-3">{{pokemon().damage}}</span>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="d-flex justify-content-between align-items-center">
+                    <mat-list-item>Types</mat-list-item>
+                    <mat-chip-set class="col-3">
+                        @for (type of pokemon().types; track pokemon().id) {
+                        <mat-chip>{{type}}</mat-chip>
+                        }
+                    </mat-chip-set>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="d-flex justify-content-between align-items-center">
+                    <mat-list-item>Date de création</mat-list-item>
+                    <span class="col-3">{{ pokemon().created | date:"dd/MM/yyyy"}}</span>
+                </div>
+            </mat-list>
+        </div>
+    </div>
+</mat-card>
