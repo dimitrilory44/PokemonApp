@@ -18,29 +18,30 @@
     <div class="row">
         @for (pokemon of pokemonsFiltered(); track pokemon.id) {
             <div class="col-2 mb-4">
-                <mat-card class="example-card" appearance="raised" appPokemonBorder [pokemonType]="pokemon.types[0]">
+                <mat-card 
+                    class="pokemon-card" 
+                    appearance="raised" 
+                    appPokemonBorder 
+                    [pokemonType]="pokemon.types[0]" 
+                    [routerLink]="['/pokemons', pokemon.id]" 
+                    (click)="setTitle(pokemon.name)"
+                    >
                     <mat-card-header>
                         <mat-card-title-group class="d-flex align-items-center justify-content-space-between">
                             <mat-card-title>{{ pokemon.name }}</mat-card-title>
-                            <button mat-icon-button [routerLink]="['/pokemons', pokemon.id]" (click)="setTitle(pokemon.name)"><mat-icon>visibility</mat-icon></button>
                         </mat-card-title-group>
                     </mat-card-header>
                     <img mat-card-image [src]="pokemon.picture" [alt]="pokemon.name">
                     <mat-card-content>
-                    <span class="text-center">
-                        Taille : {{ size(pokemon) }}
-                    </span>
-                    <p class="text-center">
-                        {{ pokemon.created | date:"dd/MM/yyyy" }}
-                    </p>
-                    <p class="text-center">
-                        Point de vie : {{ pokemon.life }}
-                    </p>
+                        <p class="text-center">
+                            Taille : {{ size(pokemon) }}
+                            {{ pokemon.created | date:"dd/MM/yyyy" }}
+                        </p>
+                        <p class="text-center">
+                            Point de vie : {{ pokemon.life }}
+                            Dégâts : {{ pokemon.damage }}
+                        </p>
                     </mat-card-content>
-                    <mat-card-actions align="start">
-                        <button mat-stroked-button (click)="decrement(pokemon)" [disabled]="pokemon.life <= 10">-</button>
-                        <button mat-stroked-button (click)="increment(pokemon)" [disabled]="pokemon.life >= 30">+</button>
-                    </mat-card-actions>
                 </mat-card>
             </div>
         } @empty {         

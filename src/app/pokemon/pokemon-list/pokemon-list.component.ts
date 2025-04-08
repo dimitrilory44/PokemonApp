@@ -18,7 +18,7 @@ import { Title } from '@angular/platform-browser';
   standalone: true,
   imports: [MatCardModule, MatButtonModule, MatIconModule, PokemonBorderDirective, DatePipe, MatFormFieldModule, MatInputModule, FormsModule, RouterLink],
   templateUrl: './pokemon-list.component.html',
-  styles: ``
+  styles: `.pokemon-card {cursor: pointer}`
 })
 export class PokemonListComponent {
   /** 
@@ -77,22 +77,6 @@ export class PokemonListComponent {
       return "Grand";
     }
     return "Moyen";
-  }
-
-  /**
-   * Incrémente les points de vie d'un Pokémon.
-   * @param pokemon - L'objet Pokémon dont on augmente la vie.
-   */
-  increment(pokemon: Pokemon) {
-    pokemon.life = pokemon.life + 1;
-  }
-
-  /**
-   * Décrémente les points de vie d'un Pokémon.
-   * @param pokemon - L'objet Pokémon dont on diminue la vie.
-   */
-  decrement(pokemon: Pokemon) {
-    pokemon.life = pokemon.life - 1;
   }
 
 }

@@ -40,4 +40,5 @@ export class PokemonProfileComponent {
    * La donnée est récupérée via le service `PokemonService`.
    */
   readonly pokemon = signal(this.#pokemonService.getPokemonById(this.#pokemonId))
+
 }

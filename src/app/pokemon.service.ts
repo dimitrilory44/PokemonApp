@@ -44,6 +44,7 @@ export class PokemonService {
       'Electrik',
       'Poison',
       'Fée',
+      'Eau',
       'Vol',
     ]
   }
