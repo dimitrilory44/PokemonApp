@@ -12,11 +12,13 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { toSignal } from '@angular/core/rxjs-interop';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-pokemon-list',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule, PokemonBorderDirective, DatePipe, MatFormFieldModule, MatInputModule, FormsModule, RouterLink],
+  imports: [MatProgressSpinnerModule,MatCardModule, MatButtonModule, MatIconModule, PokemonBorderDirective, DatePipe, MatFormFieldModule, MatInputModule, FormsModule, RouterLink],
   templateUrl: './pokemon-list.component.html',
   styles: `.pokemon-card {cursor: pointer}`
 })
@@ -37,7 +39,9 @@ export class PokemonListComponent {
    * Signal contenant la liste des Pokémon.
    * La propriété ne peut être assigné qu'une fois d'où la propriété readonly.
    */
-  readonly pokemons = signal(this.#pokemonService.getPokemonList());
+  readonly pokemons = toSignal(this.#pokemonService.getPokemonList(), {
+    initialValue: []
+  });
 
   /** 
    * Signal contenant le terme de recherche de l'utilisateur.
@@ -55,7 +59,13 @@ export class PokemonListComponent {
 
     return pokemons.filter(pokemon => 
       pokemon.name.toLowerCase().includes(searchTerm.trim().toLowerCase()))
-  })
+  });
+
+  /** 
+    * Signal calculé qui retourne `true` si la liste des Pokémon est vide.
+    * Cela permet d’afficher un indicateur de chargement ou un message si besoin.
+    */
+  readonly loading = computed(() => this.pokemons().length === 0)
 
   /**
    * Met à jour le titre de la page.

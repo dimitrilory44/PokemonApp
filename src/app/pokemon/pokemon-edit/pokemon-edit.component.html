@@ -1,19 +1,20 @@
 <div class="container mt-5">
+    @if (pokemon(); as pokemon) {
     <div class="card">
       <div class="row g-0">
         <div
           class="col-md-4 d-flex align-items-center justify-content-center bg-light"
         >
           <img
-            [src]="pokemon().picture"
+            [src]="pokemon.picture"
             class="img-fluid rounded-start"
-            [alt]="pokemon().name"
-          />
+            [alt]="pokemon.name"
+          />  
         </div>
         <div class="col-md-8">
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="card-body">
-              <h2 class="card-title">{{ pokemon().name }}</h2>
+              <h2 class="card-title">{{ pokemon.name }}</h2>
               <table class="table">
                 <tbody>
                   <tr>
@@ -23,7 +24,7 @@
                         formControlName="name"
                         type="text"
                         class="form-control"
-                        [value]="pokemon().name"
+                        [value]="pokemon.name"
                         placeholder="Nom du Pokémon"
                         [class.is-invalid]="pokemonName.invalid"
                       />
@@ -57,7 +58,7 @@
                           formControlName="life"
                           type="number"
                           class="form-control text-center"
-                          [value]="pokemon().life"
+                          [value]="pokemon.life"
                         />
                         <button 
                           class="btn btn-outline-secondary" 
@@ -82,7 +83,7 @@
                           formControlName="damage"
                           type="number"
                           class="form-control text-center"
-                          [value]="pokemon().damage"
+                          [value]="pokemon.damage"
                         />
                         <button 
                           class="btn btn-outline-secondary" 
@@ -145,7 +146,7 @@
               <div class="d-flex justify-content-between mt-4">
                 <button
                   class="btn btn-link text-decoration-none text-warning"
-                  [routerLink]="['/pokemons', pokemon().id]"
+                  [routerLink]="['/pokemons', pokemon.id]"
                 >
                   RETOUR
                 </button>
@@ -163,4 +164,9 @@
         </div>
       </div>
     </div>
+  } @else {
+    <div class="d-flex justify-content-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
 </div>
